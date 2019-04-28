@@ -31,8 +31,6 @@ def target(name, arvg1):
 def run(arvg1):
     pool = multiprocessing.Pool(4)
     for index, one in enumerate(open(arvg1+'.json', encoding='utf-8')):
-        if index > 5:
-            break
         dic = eval(one)
         name = dic['entName']
         pool.apply_async(target, args=(name, arvg1))
