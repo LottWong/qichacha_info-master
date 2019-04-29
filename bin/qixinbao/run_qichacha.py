@@ -21,8 +21,7 @@ from src.qichacha import Qcc
 
 
 def target(name, arvg1):
-    qcc = Qcc("http://www.qichacha.com/search?key={}", name, proxies=[
-        "http://honel521:538ad8-385c51-b63230-0482e5-cfd54a@megaproxy.rotating.proxyrack.net:222"])
+    qcc = Qcc("http://www.qichacha.com/search?key={}", name, proxies=["http://honel521:538ad8-385c51-b63230-0482e5-cfd54a@megaproxy.rotating.proxyrack.net:222"])
     dic = qcc.get_index()
     with open(arvg1+'.txt', "a") as f:
         f.write(json.dumps(dic, ensure_ascii=False) + "\n")
@@ -31,6 +30,8 @@ def target(name, arvg1):
 def run(arvg1):
     pool = multiprocessing.Pool(4)
     for index, one in enumerate(open(arvg1+'.json', encoding='utf-8')):
+        if index > 0: #测试单个
+            break
         dic = eval(one)
         name = dic['entName']
         pool.apply_async(target, args=(name, arvg1))

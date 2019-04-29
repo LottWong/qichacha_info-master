@@ -23,7 +23,8 @@ sys.path.append("%s/.." % cur_dir)
 class Qcc(object):
     def __init__(self, url, company, proxies=[]):
         self.url = url.format(company)
-        self.spider = Request.Request(proxies=[])
+        self.proxies = proxies
+        self.spider = Request.Request(self.proxies)
         self.header = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36',
         }
